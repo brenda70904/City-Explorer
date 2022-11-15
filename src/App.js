@@ -3,7 +3,7 @@ import React from "react";
 export default class App extends React.Component{
   
   handleSubmit = (e) => {
-    e.preventDefault
+    e.preventDefault();
   }
   render(){
     return(
