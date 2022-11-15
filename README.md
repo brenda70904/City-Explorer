@@ -21,7 +21,7 @@ React, Bootstrap, Axios
 
 ## Change Log
 
-11/14/2022 3:30pm created react app, got all API key. acp to github.
+11/14/2022 search function added with return a map, lat and lon.
 
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
@@ -36,6 +36,9 @@ We created this work flow together.
 ### Name of feature: API for location data and map
 
 Estimate of time needed to complete: 2.5hours
+
 Start time: 3:30pm
+
 Finish time:
+
 Actual time needed to complete:
