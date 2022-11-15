@@ -16,6 +16,7 @@ This project allows users to explore the city they enter.
 4. Handle errors, and return error messages to the user when something goes wrong.
 
 ## Architecture
+
 React, Bootstrap, Axios
 
 ## Change Log
@@ -30,3 +31,10 @@ React, Bootstrap, Axios
 
 partner: Martin Hansen
 We created this work flow together.
+
+### Name of feature: API for location data and map
+
+Estimate of time needed to complete: 2.5hours
+Start time: 3:30pm
+Finish time:
+Actual time needed to complete:
