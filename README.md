@@ -31,7 +31,7 @@ React, Bootstrap, Axios
 
 partner: Martin Hansen
 We created this work flow together.
-![workflowImg](https://imgur.com/QR7Pzs1)
+![workflowImg](https://i.imgur.com/QR7Pzs1.png)
 
 ### Name of feature: API for location data and map
 
