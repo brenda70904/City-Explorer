@@ -13,6 +13,7 @@ export default class Main extends React.Component {
       lon:"",
       isHidden:true,
       isError:false,
+      displayMap:false,
       errorMessage:"",
     }
   }
@@ -27,12 +28,14 @@ export default class Main extends React.Component {
       lat:this.state.location.lat,
       lon:this.state.location.lon,
       location: location.data[0], 
-      isError: false
+      displayMap:true
+      // isError: false,
+      
     })
   }catch(error){
     // console.log(error.message);
     this.setState({
-      isError:true,
+      // isError:true,
       errorMessage : error.message})
   }
     // console.log(location.data[0])
@@ -46,8 +49,8 @@ export default class Main extends React.Component {
           <Button className="formButton" type="submit" >Explore!</Button>
         </Form>
         
-
-        <Card className="mapCard" show={this.state.isHidden} >
+      {this.state.displayMap ?
+          <Card className="mapCard" show={this.state.isHidden} >
           <Card.Header>{this.state.location.display_name}</Card.Header>
           <Card.Body>
             <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=13`} alt={this.state.location.display_name} />
@@ -57,7 +60,8 @@ export default class Main extends React.Component {
             </ListGroup>
           </Card.Body>
         </Card>
-
+      : <p>{this.state.errorMessage}</p>}
+        
 
 
       </>
