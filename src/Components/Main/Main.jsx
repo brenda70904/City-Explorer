@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
-// import Map from "../Map/Map";
-// import Weather from "../Weather/Weather";
-import { Form, Button, Card, ListGroup } from 'react-bootstrap';
-import "./Main.css"
-import { Next } from "react-bootstrap/esm/PageItem";
+import { Form, Button } from "react-bootstrap";
+import Weather from "../Weather/Weather";
+import Map from "../Map/Map";
+import Movie from "../Movie/Movie"
+import "./Main.css";
+
 
 
 export default class Main extends React.Component {
@@ -12,40 +13,49 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       location: {},
-      lat:"",
-      lon:"",
-      isHidden:true,
-      isError:false,
-      displayMap:false,
-      errorMessage:"",
-      forecast:[]
+      lat: "",
+      lon: "",
+      isHidden: true,
+      isError: false,
+      displayMap: false,
+      errorMessage: "",
+      forecast: [],
+      movies:[]
     }
   }
 
 
   handleLocationSubmit = async (e) => {
-    try{
-    e.preventDefault();
-    //console.log(e.target.city.value);
-    let location = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${e.target.city.value}&format=json`)
-    
-    //Make request to server
-    // let weather = await axios.get(process.env.REACT_APP_SERVER+"/weather?lat="+location.lat+"&lon="+location.lon);
+    try {
+      e.preventDefault();
+      //weather API
+      let location = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${e.target.city.value}&format=json`)
+      let locationNameOnly = location.data[0].display_name.split(',').slice(0,1);
+      // console.log(locationNameOnly)
 
-    this.setState({ 
-      location: location.data[0], 
-      displayMap:true,
-      // isError: false,
-      // forecast: weather //Array of forecast weather
-    })
+      //Weather API
+      let weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${location.data[0].lat}&lon=${location.data[0].lon}`);
 
-  }catch(error){
-    // console.log(error.message);
-    this.setState({
-      // isError:true,
-      errorMessage : error.message})
-  }
-    // console.log(location.data[0])
+      //Movie API
+      let movie = await axios.get(`${process.env.REACT_APP_SERVER}/movies?query=${locationNameOnly}`);
+      
+
+      this.setState({
+        location: location.data[0],
+        lat: location.data[0].lat,
+        lon: location.data[0].lon,
+        forecast: weather.data,//Array of forecast weather
+        movies: movie.data, 
+        displayMap: true
+        
+      })
+
+    } catch (error) {
+      this.setState({
+        // isError:true,
+        errorMessage: error.message
+      })
+    }
   }
   render() {
     return (
@@ -55,30 +65,22 @@ export default class Main extends React.Component {
           <Form.Control type="text" name="city" placeholder="enter city..." />
           <Button className="formButton" type="submit" >Explore!</Button>
         </Form>
-        
-      {this.state.displayMap ?
-          <Card className="mapCard" show={this.state.isHidden} >
-          <Card.Header>{this.state.location.display_name}</Card.Header>
-          <Card.Body>
-            <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=13`} alt={this.state.location.display_name} />
-            <ListGroup className="list-group-flush">
-              <ListGroup.Item>Latitude: {this.state.location.lat}</ListGroup.Item>
-              <ListGroup.Item>Longtitude: {this.state.location.lon}</ListGroup.Item>
-            </ListGroup>
-          </Card.Body>
-        </Card>
-      : <p>{this.state.errorMessage}</p>}
-        
-      <div>
-        {
-          this.state.forecast.map(eachDate => (
-            <div>
-              {eachDate.description}
-            </div>
-          ))
-        }
-      </div>
 
+        <Map
+          displayMap={this.state.displayMap}
+          lon={this.state.lon}
+          lat={this.state.lat}
+          location={this.state.location}
+          displayName={this.state.displayName}
+          errorMessage={this.state.errorMessage}
+
+        />
+        <Weather
+          forecast={this.state.forecast}  
+        />
+        <Movie
+          movies={this.state.movies}
+        />  
       </>
     )
 
