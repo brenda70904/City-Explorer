@@ -42,3 +42,43 @@ Start time: 3:30pm
 Finish time:
 
 Actual time needed to complete:
+
+
+**Version**: 1.1.0
+<!-- (increment the patch/fix version number if you make more commits past your first submission) -->
+
+## Overview
+
+This project allows users to explore the city they enter, user will be able to see the map of the area they are searching lat and lon, and the weather.
+
+## Getting Started
+
+1.
+
+## Architecture
+
+React, Bootstrap, Axios
+
+## Change Log
+
+11/14/2022 search function added with return a map, lat and lon.
+
+<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+
+01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+
+## Credit and Collaborations
+
+partner: DeShon Dixon
+We created this work flow together.
+![lab7Workfolow](https://i.imgur.com/nn9btBC.png)
+
+### Name of feature: build and connect to our own server
+
+Estimate of time needed to complete: 2.5hours
+
+Start time:5:20pm
+
+Finish time:
+
+Actual time needed to complete:

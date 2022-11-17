@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
+// import Map from "../Map/Map";
+// import Weather from "../Weather/Weather";
 import { Form, Button, Card, ListGroup } from 'react-bootstrap';
 import "./Main.css"
+import { Next } from "react-bootstrap/esm/PageItem";
 
 
 export default class Main extends React.Component {
@@ -15,6 +18,7 @@ export default class Main extends React.Component {
       isError:false,
       displayMap:false,
       errorMessage:"",
+      forecast:[]
     }
   }
 
@@ -24,14 +28,17 @@ export default class Main extends React.Component {
     e.preventDefault();
     //console.log(e.target.city.value);
     let location = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${e.target.city.value}&format=json`)
+    
+    //Make request to server
+    // let weather = await axios.get(process.env.REACT_APP_SERVER+"/weather?lat="+location.lat+"&lon="+location.lon);
+
     this.setState({ 
-      lat:this.state.location.lat,
-      lon:this.state.location.lon,
       location: location.data[0], 
-      displayMap:true
+      displayMap:true,
       // isError: false,
-      
+      // forecast: weather //Array of forecast weather
     })
+
   }catch(error){
     // console.log(error.message);
     this.setState({
@@ -62,7 +69,15 @@ export default class Main extends React.Component {
         </Card>
       : <p>{this.state.errorMessage}</p>}
         
-
+      <div>
+        {
+          this.state.forecast.map(eachDate => (
+            <div>
+              {eachDate.description}
+            </div>
+          ))
+        }
+      </div>
 
       </>
     )
