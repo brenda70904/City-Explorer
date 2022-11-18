@@ -46,8 +46,8 @@ export default class Main extends React.Component {
         lon: location.data[0].lon,
         forecast: typeof(weather.data) != 'string' ?  weather.data : [],//Array of forecast weather
         movies: movie.data, 
-        displayMap: true
-        
+        displayMap: true,
+        locationNameOnly:location.data[0].display_name.split(',').slice(0,1)
       })
     } catch (error) {
       this.setState({
@@ -79,6 +79,7 @@ export default class Main extends React.Component {
         />
         <Movie
           movies={this.state.movies}
+          locationNameOnly={this.state.locationNameOnly}
         />  
       </>
     )
