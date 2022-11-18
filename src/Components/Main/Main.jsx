@@ -34,22 +34,21 @@ export default class Main extends React.Component {
       // console.log(locationNameOnly)
 
       //Weather API
-      let weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${location.data[0].lat}&lon=${location.data[0].lon}`);
+      let weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${location.data[0].lat}&lon=${location.data[0].lon}`)
 
       //Movie API
       let movie = await axios.get(`${process.env.REACT_APP_SERVER}/movies?query=${locationNameOnly}`);
       
-
+      
       this.setState({
         location: location.data[0],
         lat: location.data[0].lat,
         lon: location.data[0].lon,
-        forecast: weather.data,//Array of forecast weather
+        forecast: typeof(weather.data) != 'string' ?  weather.data : [],//Array of forecast weather
         movies: movie.data, 
         displayMap: true
         
       })
-
     } catch (error) {
       this.setState({
         // isError:true,
@@ -83,7 +82,5 @@ export default class Main extends React.Component {
         />  
       </>
     )
-
-
   }
 }
