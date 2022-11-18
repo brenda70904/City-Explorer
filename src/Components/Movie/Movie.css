@@ -1,0 +1,17 @@
+.carousel {
+  width: 400px;
+  background-color: darkslategrey;
+}
+
+.caption {
+  background-color: rgb(0, 0, 76);
+  opacity: 0.8;
+  color: black;
+  font-size: 10px;
+}
+
+.carouselImg {
+  max-width: 350px;
+  display: flex;
+  justify-content: space-around;
+}
