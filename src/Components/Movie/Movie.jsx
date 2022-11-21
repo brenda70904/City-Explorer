@@ -8,7 +8,6 @@ export default class Movie extends React.Component {
       <>
         <Carousel>
           {this.props.movies.map((movie, i) => (
-            
               <Carousel.Item className="carousel mb-1" key={i}>
                 <Carousel.Caption className="caption">
                   <h3>{movie.title}</h3>

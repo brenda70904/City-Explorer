@@ -1,19 +1,22 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
+import Dropdown from 'react-bootstrap/Dropdown'
 import "./Weather.css"
 
-export default class Weather extends React.Component{
-  render(){
-    return(
+export default class Weather extends React.Component {
+  render() {
+    return (
       <>
-        {
-          this.props.forecast.map((eachDate,idx) => (
-            <ListGroup key={idx} horizontal={eachDate} className="weatherLs my-2">
-            <ListGroup.Item>{eachDate.description}</ListGroup.Item>
-            <ListGroup.Item>{eachDate.date}</ListGroup.Item>
-          </ListGroup>
-          ))
-        }
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Daily Weather
+          </Dropdown.Toggle>
+          <Dropdown.Menu>{
+            this.props.forecast.map((eachDate, idx) => (
+              <Dropdown.Item key={idx} >{eachDate.time} : {eachDate.forecast}</Dropdown.Item>
+            ))
+          }</Dropdown.Menu>
+        </Dropdown>
+
       </>
     )
   }
