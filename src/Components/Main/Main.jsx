@@ -36,7 +36,7 @@ export default class Main extends React.Component {
       
       //Weather API
       let weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${location.data[0].lat}&lon=${location.data[0].lon}`)
-
+      console.log(weather.data);
       //Movie API
       let movie = await axios.get(`${process.env.REACT_APP_SERVER}/movie?cityName=${locationNameOnly}`);
       

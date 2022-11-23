@@ -14,10 +14,10 @@ export default class Movie extends React.Component {
                   <h5>{movie.releaseDate}</h5>
                   {/* <p>{movie.overview}</p> */}
                 </Carousel.Caption>
-                <img className="carouselImg"
-                  alt={movie.title}
-                  src={movie.src}
-                ></img>
+                {
+                  movie.src.match(/w500null$/) ? <img src='https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg' alt='noImage' width="500"></img> 
+                  :<img src={movie.src} alt={movie.title} ></img>
+                }
               </Carousel.Item>
 
             
