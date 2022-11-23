@@ -10,11 +10,13 @@ export default class Weather extends React.Component {
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Daily Weather
           </Dropdown.Toggle>
-          <Dropdown.Menu>{
+          <Dropdown.Menu>
+          {
             this.props.forecast.map((eachDate, idx) => (
               <Dropdown.Item key={idx} >{eachDate.time} : {eachDate.forecast}</Dropdown.Item>
             ))
-          }</Dropdown.Menu>
+          }
+          </Dropdown.Menu>
         </Dropdown>
 
       </>
